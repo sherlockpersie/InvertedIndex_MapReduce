@@ -1,5 +1,5 @@
-##Inverted Index
-###Mapper
+#Inverted Index
+##Mapper
 实现mapper类，将对每个出现的单词进行映射，key为单词和所处文件名连接而成的字符串，value为该词在该文件中出现次数，初始设定为1。
 ```
         public static class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, Text> {
@@ -24,7 +24,7 @@
                 }
         }
 ```
-###Combiner
+##Combiner
 实现combiner类，实质上也是一种reducer，不过并不是最终的归纳，而是中间过程。在该类的reduce方法中将单词在一个文件中的出现次数进行汇总，并将文件名从key中移到value中与次数连接，使key中只剩下单词。
 ```
         public static class InvertedIndexCombiner extends Reducer<Text, Text, Text, Text> {
@@ -44,7 +44,7 @@
                 }
         }
 ```
-###Reducer
+##Reducer
 实现reducer类，将同一单词在各文件中的出现情况进行汇总，将不同文件的文件名和该词出现次数连接成一个长字符串，存储在value中。
 ```
         public static class InvertedIndexReducer extends Reducer<Text, Text, Text, Text> {
@@ -61,7 +61,7 @@
                 }
         }
 ```
-###主函数
+##主函数
 ```
         public static void main(String[] args) throws Exception {
                 // 以下部分为HadoopMapreduce主程序的写法，对照即可
